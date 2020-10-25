@@ -64,14 +64,14 @@ public class twitterSetup {
 				  
 				  String jsonString = response.body().string() ; //assign your JSON String here
 				  JSONObject obj = new JSONObject(jsonString);
-				  
-				 // String tweet = obj.getJSONObject("statuses").getString("text");
-				  
+//				  
+//				 // String tweet = obj.getJSONObject("statuses").getString("text");
+//				  
 				  JSONArray arr = obj.getJSONArray("statuses");
 				  String[] tweet= new String[arr.length()];
 				  for (int i = 0; i < arr.length(); i++)
 				  {
-				      tweet[i] = arr.getJSONObject(i).getString("text");
+				      tweet[i] = arr.getJSONObject(i).toString();
 				      
 				  }
 				  //logger.info(tweet[0]);

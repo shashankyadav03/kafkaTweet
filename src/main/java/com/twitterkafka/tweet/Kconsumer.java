@@ -1,5 +1,6 @@
-package com.twitterkafka.tweet;
+ package com.twitterkafka.tweet;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
@@ -12,6 +13,8 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import elasticSearch.insert;
 
 
 
@@ -34,7 +37,7 @@ public class Kconsumer {
 		
 	}
 	
-	public static void create() {
+	public static void create() throws IOException {
 		
 				
 		KafkaConsumer<String,String> consumer = new KafkaConsumer<String,String>(setProperty());
@@ -46,8 +49,9 @@ public class Kconsumer {
 			
 			for (ConsumerRecord<String, String>  record : records) {
 				
-				logger.info("Key: "+record.key() + ", Value: "+record.value());
-				logger.info("Partition: "+record.partition() + ", Offset: "+record.offset());
+				//logger.info("Key: "+record.key() + ", Value: "+record.value());
+				//logger.info("Partition: "+record.partition() + ", Offset: "+record.offset());
+				insert.insertData(record.value());
 				
 			}
 			//consumer.close();
